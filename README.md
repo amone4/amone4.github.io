@@ -1,1 +1,0 @@
-# amone4.github.io
