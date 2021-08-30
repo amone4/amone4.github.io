@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Gift</title>
+
+<style type="text/css">
+	table {
+		margin: 0;
+		padding: 0;
+		width: 100%;
+	}
+	tr {
+		margin: 0;
+		padding: 0;
+	}
+	td {
+		margin: 0;
+		border: none;
+	}
+	.td_off {
+		background: #1D2125;
+		border: dotted 1px #F8F9FA;
+	}
+	textarea, .td_on {
+		background: #F8F9FA;
+		border: dotted 1px #1D2125;
+	}
+</style>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+
+</head>
+<body class="bg-dark">
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+	<button type="button" class="d-none" data-toggle="modal" data-target="#loader_modal" id="modal_open_btn"></button>
+	<div class="modal fade bg-dark" id="loader_modal" tabindex="-1" role="dialog" aria-labelledby="loader_modal_head" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered bg-dark" role="document">
+			<div class="modal-content bg-dark w-100 h-100 p-0 m-0 border-0">
+				<div class="modal-header bg-dark w-100 h-100 p-0 m-0 border-0">
+					<h2 class="text-light bg-dark w-100 h-100 p-0 m-0 border-0 text-center display-1" id="loader_modal_head"><strong>Happy Anniversary!</strong></h2>
+				</div>
+				<button type="button" class="d-none" data-dismiss="modal" id="modal_close_btn"></button>
+			</div>
+		</div>
+	</div>
+
+	<div id="body" class="container-fluid lead invisible bg-dark text-light">
+
+		<div class="row">
+			<div class="col-12">
+				<div class="text-center">
+					<div>It's been four years; so I thought of etching us permanently</div>
+					<div>The nerd me rose up and said, what's more permanent than Maths?</div>
+					<div>At the top of the page that's in your hand, you'll see an inequality</div>
+					<div>Below is it's plot for values: (x = [K, K+17), y = [1, 106))</div>
+					<div>where K is the big number you see at the bottom of the page</div>
+					<div>It's Maths, so you can reproduce this, even if the page goes down</div>
+					<div>That's why I've attached the python code (and instructions) for this</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-4 offset-md-4 col-8 offset-2"><hr></div>
+		</div>
+
+		<br>
+
+		<div class="row">
+			<div class="col-12"><strong>Formula:</strong></div>
+		</div>
+		<div class="row">
+			<div class="col-11 offset-1">
+				<img src="formula_negative.png" style="max-width: 100%; height: auto;">
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-4 offset-md-4 col-8 offset-2"><hr></div>
+		</div>
+
+		<br>
+
+		<div class="row">
+			<div class="col-12"><strong>Plot:</strong></div>
+		</div>
+		<div class="row strong">
+			<div class="col-1">
+				<table id="pref">
+					<tbody>
+						<tr class="align-top small" style="text-align: right;"><td><strong>K+17</strong></td></tr>
+						<tr class="align-bottom small" style="text-align: right;"><td><strong>K</strong></td></tr>
+					</tbody>
+				</table>
+			</div>
+
+			<div class="col-11" id="container">
+				<table>
+					<tbody id="table"></tbody>
+				</table>
+			</div>
+		</div>
+
+		<div class="row strong">
+			<div class="col-6 offset-1">
+				<div class="text-left small"><strong>0</strong></div>
+			</div>
+			<div class="col-5">
+				<div class="text-right small" style="text-align: right;"><strong>106</strong></div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-4 offset-md-4 col-8 offset-2"><hr></div>
+		</div>
+
+		<br>
+
+		<div class="row">
+			<div class="col-12"><strong>K =</strong></div>
+		</div>
+		<div class="row">
+			<div class="col-12">
+				<textarea rows=7 id="textbox" class="form-control"></textarea>
+			</div>
+		</div>
+
+		<br>
+
+		<div class="row">
+			<div class="btn-group">
+				<button type="button" class="btn btn-outline-light" onclick="canvas_to_num()">Canvas to Number</button>
+				<button type="button" class="btn btn-outline-light" onclick="num_to_canvas()">Number to Canvas</button>
+				<button type="button" class="btn btn-outline-light" onclick="clear_canvas_full()">Clear Canvas</button>
+				<button type="button" class="btn btn-outline-light" onclick="reset()">Reset</button>
+			</div>
+		</div>
+	</div>
+
+<script type="text/javascript">
+	const K_VAL = '17533761001530147396823793856317329998063316498414305399924060411279519280210031293958068305878020492670583570061293844957685727403656819055790544961028185221880026786793497162602702948470752931619498484749711446642438488738551229812516535778873597898497640785141239879309394792646422975204027480711484398069918094231905535995693020825915673642089647325091980823539542128767275774157678005182113052663372623189784932622724035197614328035833990057120390859376900071372132212331229773457966938458846328202109770769437815911688955471331328';
+	const ROWS = 17;
+	const COLS = 106;
+	let tds = null;
+	let text_div = null;
+	let body_div = null;
+	function show_prompt() {
+		let digits = prompt('Please check ... and you\'ll find a piece of paper. Once found, please enter the bottommost-rightmost 2 digits to proceed');
+		if (digits != K_VAL.slice(-2)) {
+			show_prompt();
+		} else {
+			body_div.classList.remove('invisible');
+		}
+	}
+	function toggle_td(i, j) {
+		let div = document.getElementById('td_' + i + '_' + j);
+		div.classList.toggle('td_on');
+		tds[i][j] = ~tds[i][j];
+	}
+	function canvas_to_num() {
+		let sum = BigInt(0);
+		let power_res = BigInt(1);
+		for (let j = 0; j < COLS; j++) {
+			for (let i = 0; i < ROWS; i++) {
+				if (tds[i][j] != 0)
+					sum = sum + power_res;
+				power_res <<= BigInt(1);
+			}
+		}
+		let prod = sum * BigInt(17);
+		text_div.value = prod;
+	}
+	function clear_canvas() {
+		for (let i = 0; i < ROWS; i++)
+			for (let j = 0; j < COLS; j++)
+				if (tds[i][j] != 0)
+					toggle_td(i, j);
+	}
+	function clear_canvas_full() {
+		clear_canvas();
+		text_div.value = '';
+	}
+	function num_to_canvas() {
+		clear_canvas();
+		let val_str = text_div.value;
+		if (val_str.length == 0)
+			val_str = '0';
+		let val = BigInt(val_str);
+		val = val / BigInt(17);
+		let power_val = BigInt(1);
+		for (let j = 0; j < COLS; j++) {
+			for (let i = 0; i < ROWS; i++) {
+				let and_res = val & power_val;
+				if (and_res != BigInt(0))
+					toggle_td(i, j);
+				power_val <<= BigInt(1);
+			}
+		}
+	}
+	function reset() {
+		text_div.value = K_VAL;
+		num_to_canvas();
+	}
+	window.onload = function() {
+		let body_width = $('#container').width();
+		let col_dim = Math.floor(Math.floor(body_width / COLS) / 2);
+
+		text_div = document.getElementById('textbox');
+
+		tds = new Array(ROWS);
+		let table_div = document.getElementById('table');
+		for (let i = 0; i < ROWS; i++) {
+			tds[i] = new Array(COLS);
+			let row_div = document.createElement('tr');
+			for (let j = 0; j < COLS; j++) {
+				tds[i][j] = 0;
+				let real_i = ROWS - i - 1;
+				let real_j = j;
+				let col_div = document.createElement('td');
+				col_div.setAttribute('onclick', 'toggle_td(' + real_i + ', ' + real_j + ')');
+				col_div.setAttribute('id', 'td_' + real_i + '_' + real_j);
+				col_div.setAttribute('class', 'td_off');
+				col_div.style.padding = col_dim + 'px';
+				row_div.append(col_div);
+			}
+			table_div.append(row_div);
+		}
+
+		$('#pref').height(
+			$('#container').height()
+		);
+
+		reset();
+
+		$('#modal_open_btn').click();
+		setTimeout(
+			function() {
+				$('#modal_close_btn').click();
+				body_div = document.getElementById('body');
+				setTimeout(show_prompt, 100);
+			}
+		, 2500);
+	}
+</script>
+
+</body>
+</html>
