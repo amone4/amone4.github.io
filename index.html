@@ -22,6 +22,9 @@
 		background: #1D2125;
 		border: dotted 1px #F8F9FA;
 	}
+	.td_off:hover {
+		background: #F8F9FA;
+	}
 	textarea, .td_on {
 		background: #F8F9FA;
 		border: dotted 1px #1D2125;
@@ -33,7 +36,7 @@
 </head>
 <body class="bg-dark">
 
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
@@ -51,93 +54,101 @@
 
 	<div id="body" class="container-fluid lead invisible bg-dark text-light">
 
-		<div class="row">
-			<div class="col-12">
-				<div class="text-center">
-					<div>It's been four years; so I thought of etching us permanently</div>
-					<div>The nerd me rose up and said, what's more permanent than Maths?</div>
-					<div>At the top of the page that's in your hand, you'll see an inequality</div>
-					<div>Below is it's plot for values: (x = [K, K+17), y = [1, 106))</div>
-					<div>where K is the big number you see at the bottom of the page</div>
-					<div>It's Maths, so you can reproduce this, even if the page goes down</div>
-					<div>That's why I've attached the python code (and instructions) for this</div>
+		<div id="header">
+			<div class="row">
+				<div class="col-12">
+					<div class="text-center">
+						<div>It's been four years; so I thought of etching us permanently</div>
+						<div>The nerd me rose up and said, what's more permanent than Maths?</div>
+						<div>At the top of the page that's in your hand, you'll see an inequality</div>
+						<div>Below is it's plot for values: (x = [K, K+17), y = [1, 106))</div>
+						<div>where K is the big number you see at the bottom of the page</div>
+						<div>It's Maths, so you can reproduce this, even if the page goes down</div>
+						<div>That's why I've attached the python code (and instructions) for this</div>
+					</div>
 				</div>
 			</div>
-		</div>
 
-		<div class="row">
-			<div class="col-md-4 offset-md-4 col-8 offset-2"><hr></div>
-		</div>
-
-		<br>
-
-		<div class="row">
-			<div class="col-12"><strong>Formula:</strong></div>
-		</div>
-		<div class="row">
-			<div class="col-11 offset-1">
-				<img src="formula_negative.png" style="max-width: 100%; height: auto;">
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="col-md-4 offset-md-4 col-8 offset-2"><hr></div>
-		</div>
-
-		<br>
-
-		<div class="row">
-			<div class="col-12"><strong>Plot:</strong></div>
-		</div>
-		<div class="row strong">
-			<div class="col-1">
-				<table id="pref">
-					<tbody>
-						<tr class="align-top small" style="text-align: right;"><td><strong>K+17</strong></td></tr>
-						<tr class="align-bottom small" style="text-align: right;"><td><strong>K</strong></td></tr>
-					</tbody>
-				</table>
-			</div>
-
-			<div class="col-11" id="container">
-				<table>
-					<tbody id="table"></tbody>
-				</table>
-			</div>
-		</div>
-
-		<div class="row strong">
-			<div class="col-6 offset-1">
-				<div class="text-left small"><strong>0</strong></div>
-			</div>
-			<div class="col-5">
-				<div class="text-right small" style="text-align: right;"><strong>106</strong></div>
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="col-md-4 offset-md-4 col-8 offset-2"><hr></div>
-		</div>
-
-		<br>
-
-		<div class="row">
-			<div class="col-12"><strong>K =</strong></div>
-		</div>
-		<div class="row">
-			<div class="col-12">
-				<textarea rows=7 id="textbox" class="form-control"></textarea>
+			<div class="row">
+				<div class="col-md-4 offset-md-4 col-8 offset-2"><hr></div>
 			</div>
 		</div>
 
 		<br>
 
-		<div class="row">
-			<div class="btn-group">
-				<button type="button" class="btn btn-outline-light" onclick="canvas_to_num()">Canvas to Number</button>
-				<button type="button" class="btn btn-outline-light" onclick="num_to_canvas()">Number to Canvas</button>
-				<button type="button" class="btn btn-outline-light" onclick="clear_canvas_full()">Clear Canvas</button>
-				<button type="button" class="btn btn-outline-light" onclick="reset()">Reset</button>
+		<div id="formula">
+			<div class="row">
+				<div class="col-12"><strong>Inequality:</strong></div>
+			</div>
+			<div class="row">
+				<div class="col-11 offset-1">
+					<img src="formula_negative.png" style="max-width: 100%; height: auto;">
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-4 offset-md-4 col-8 offset-2"><hr></div>
+			</div>
+		</div>
+
+		<br>
+
+		<div id="plot">
+			<div class="row">
+				<div class="col-12"><strong>Plot:</strong></div>
+			</div>
+			<div class="row strong">
+				<div class="col-1">
+					<table id="pref">
+						<tbody>
+							<tr class="align-top small" style="text-align: right;"><td><strong>K+17</strong></td></tr>
+							<tr class="align-bottom small" style="text-align: right;"><td><strong>K</strong></td></tr>
+						</tbody>
+					</table>
+				</div>
+
+				<div class="col-11" id="container">
+					<table>
+						<tbody id="table"></tbody>
+					</table>
+				</div>
+			</div>
+
+			<div class="row strong">
+				<div class="col-6 offset-1">
+					<div class="text-left small"><strong>0</strong></div>
+				</div>
+				<div class="col-5">
+					<div class="text-right small" style="text-align: right;"><strong>106</strong></div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-4 offset-md-4 col-8 offset-2"><hr></div>
+			</div>
+		</div>
+
+		<br>
+
+		<div id="numbers">
+			<div class="row">
+				<div class="col-12"><strong>K =</strong></div>
+			</div>
+			<div class="row">
+				<div class="col-12">
+					<textarea rows=7 id="textbox" class="form-control"></textarea>
+				</div>
+			</div>
+
+			<br>
+
+			<div class="row">
+				<div class="btn-group">
+					<button type="button" class="btn btn-outline-light" onclick="canvas_to_num()">Canvas to Number</button>
+					<button type="button" class="btn btn-outline-light" onclick="num_to_canvas()">Number to Canvas</button>
+					<button type="button" class="btn btn-outline-light" onclick="clear_canvas_full()">Clear Canvas</button>
+					<button type="button" class="btn btn-outline-light" onclick="reset()">Reset</button>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -148,13 +159,28 @@
 	const COLS = 106;
 	let tds = null;
 	let text_div = null;
-	let body_div = null;
 	function show_prompt() {
 		let digits = prompt('Please check ... and you\'ll find a piece of paper. Once found, please enter the bottommost-rightmost 2 digits to proceed');
 		if (digits != K_VAL.slice(-2)) {
 			show_prompt();
 		} else {
-			body_div.classList.remove('invisible');
+			$('#modal_open_btn').click();
+			setTimeout(function() {
+				$('#modal_close_btn').click();
+				let body_div = document.getElementById('body');
+				$('#header').css('opacity', 0);
+				$('#formula').css('opacity', 0);
+				$('#plot').css('opacity', 0);
+				$('#numbers').css('opacity', 0);
+				body_div.classList.remove('invisible');
+				$('#header').animate({ opacity: 100 }, 2500, function() {
+					$('#formula').animate({ opacity: 100 }, 2500, function() {
+						$('#plot').animate({ opacity: 100 }, 2500, function() {
+							$('#numbers').animate({ opacity: 100 }, 2500);
+						});
+					});
+				});
+			}, 2500);
 		}
 	}
 	function toggle_td(i, j) {
@@ -237,14 +263,7 @@
 
 		reset();
 
-		$('#modal_open_btn').click();
-		setTimeout(
-			function() {
-				$('#modal_close_btn').click();
-				body_div = document.getElementById('body');
-				setTimeout(show_prompt, 100);
-			}
-		, 2500);
+		show_prompt();
 	}
 </script>
 
