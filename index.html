@@ -29,6 +29,9 @@
 		background: #F8F9FA;
 		border: dotted 1px #1D2125;
 	}
+	#body {
+		padding: 5vh 5vw;
+	}
 </style>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
@@ -58,13 +61,13 @@
 			<div class="row">
 				<div class="col-12">
 					<div class="text-center">
-						<div>It's been four years; so I thought of etching us permanently</div>
-						<div>The nerd me rose up and said, what's more permanent than Maths?</div>
+						<div>It's been four years; so I wanted to etch "Us" somewhere permanently</div>
+						<div>Now you'll also agree that nothing's more permanent than Maths, right?</div>
 						<div>At the top of the page that's in your hand, you'll see an inequality</div>
-						<div>Below is it's plot for values: (x = [K, K+17), y = [1, 106))</div>
-						<div>where K is the big number you see at the bottom of the page</div>
-						<div>It's Maths, so you can reproduce this, even if the page goes down</div>
-						<div>That's why I've attached the python code (and instructions) for this</div>
+						<div>Below is the plot for this, for values: (x = [K, K+17), y = [1, 106))</div>
+						<div>where K is the big ass number you see at the bottom of the page</div>
+						<div>It's Maths, so you can reproduce this, even if this webpage goes down</div>
+						<div>You can try reproducing it with the attached python code (and instructions)</div>
 					</div>
 				</div>
 			</div>
@@ -83,6 +86,23 @@
 			<div class="row">
 				<div class="col-11 offset-1">
 					<img src="formula_negative.png" style="max-width: 100%; height: auto;">
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-4 offset-md-4 col-8 offset-2"><hr></div>
+			</div>
+		</div>
+
+		<br>
+
+		<div id="example">
+			<div class="row">
+				<div class="col-12"><strong>Python code:</strong></div>
+			</div>
+			<div class="row">
+				<div class="col-11 offset-1">
+					<img src="example.png" style="max-width: 100%; height: auto;">
 				</div>
 			</div>
 
@@ -170,16 +190,19 @@
 				let body_div = document.getElementById('body');
 				$('#header').css('opacity', 0);
 				$('#formula').css('opacity', 0);
+				$('#example').css('opacity', 0);
 				$('#plot').css('opacity', 0);
 				$('#numbers').css('opacity', 0);
 				body_div.classList.remove('invisible');
-				$('#header').animate({ opacity: 100 }, 2500, function() {
-					$('#formula').animate({ opacity: 100 }, 2500, function() {
-						$('#plot').animate({ opacity: 100 }, 2500, function() {
-							$('#numbers').animate({ opacity: 100 }, 2500);
-						});
-					});
-				});
+				$('#header').animate({opacity:100}, 2500, function() { setTimeout(function() {
+					$('#formula').animate({opacity:100}, 1500, function() { setTimeout(function() {
+						$('#example').animate({opacity:100}, 1500, function() { setTimeout(function() {
+							$('#plot').animate({opacity:100}, 1500, function() { setTimeout(function() {
+								$('#numbers').animate({opacity:100}, 1500);
+							}, 1500) });
+						}, 1500) });
+					}, 1500) });
+				}, 20000) });
 			}, 2500);
 		}
 	}
